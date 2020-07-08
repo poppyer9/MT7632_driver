@@ -1222,11 +1222,22 @@ VOID CFG80211OS_MICFailReport(PNET_DEV pNetDev, const PUCHAR src_addr, BOOLEAN u
 VOID CFG80211OS_Roamed(PNET_DEV pNetDev, IN UCHAR *pBSSID,
 		       IN UCHAR *pReqIe, IN UINT32 ReqIeLen, IN UCHAR *pRspIe, IN UINT32 RspIeLen)
 {
+#if (LINUX_VERSION_CODE > KERNEL_VERSION(4, 12, 0))
+	struct cfg80211_roam_info roam_info = { .req_ie = pReqIe,
+						.req_ie_len = ReqIeLen,
+						.resp_ie = pRspIe,
+						.resp_ie_len = RspIeLen };
+	struct cfg80211_bss bss = {};
+	memcpy(bss.bssid, pBSSID, sizeof(bss.bssid));
+	roam_info.bss = &bss;
+	cfg80211_roamed(pNetDev, &roam_info, GFP_KERNEL);
+#else
 	cfg80211_roamed(pNetDev,
 #if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 39))
 			NULL,
 #endif /* endif */
 			pBSSID, pReqIe, ReqIeLen, pRspIe, RspIeLen, GFP_KERNEL);
+#endif
 }
 
 VOID CFG80211OS_RecvObssBeacon(VOID *pCB, const PUCHAR pFrame, INT frameLen, INT freq)

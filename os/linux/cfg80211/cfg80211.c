@@ -2420,6 +2420,10 @@ static int CFG80211_OpsChangeBss(struct wiphy *pWiphy,
 	return 0;
 }
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,19,0))
+static int mt76xx_cfg80211_del_sta(struct wiphy *wiphy, struct net_device *dev,
+			      struct station_del_parameters *params)
+#else
 static int mt76xx_cfg80211_del_sta(struct wiphy *wiphy, struct net_device *dev,
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 16, 0)
 				   const u8 *mac
@@ -2427,9 +2431,13 @@ static int mt76xx_cfg80211_del_sta(struct wiphy *wiphy, struct net_device *dev,
 				   u8 *mac
 #endif				/* endif */
 	)
+#endif
 {
 	RTMP_ADAPTER *pAd;
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,19,0))
+	const u8 *mac = params->mac;
+#endif
 	MAC80211_PAD_GET(pAd, wiphy);
 
 	if (!pAd)
