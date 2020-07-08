@@ -4250,18 +4250,18 @@ VOID	WscSendEapReqId(
     /* RFC 3748 Ch 4.1: recommended to initalize Identifier with a
 	 * random number */
 	Id = RandomByte(pAd);
-    if (Id == pWpsCtrl->lastId)
-        Id += 1;
+        if (Id == pWpsCtrl->lastId)
+		Id += 1;
 	EapFrame.Code   = EAP_CODE_REQ;
 	EapFrame.Id     = Id;
 	EapFrame.Length = cpu2be16(Length);
 	EapFrame.Type   = EAP_TYPE_ID;
-    pWpsCtrl->lastId = Id;
+	pWpsCtrl->lastId = Id;
 
     /* Out buffer for transmitting EAP-Req(Identity) */
 	os_alloc_mem(NULL, (UCHAR **)&pOutBuffer, MAX_LEN_OF_MLME_BUFFER);
-    if(pOutBuffer == NULL)
-        return;
+	if(pOutBuffer == NULL)
+	    return;
 
 	FrameLen = 0;
 
@@ -4467,8 +4467,8 @@ VOID WscSendEapRspId(
 
     /* Out buffer for transmitting EAP-Req(Identity) */
 	os_alloc_mem(NULL, (UCHAR **)&pOutBuffer, MAX_LEN_OF_MLME_BUFFER);
-    if(pOutBuffer == NULL)
-        return;
+	if(pOutBuffer == NULL)
+	    return;
 
 	FrameLen = 0;
 
@@ -4595,8 +4595,10 @@ int WscSendUPnPConfReqMsg(
 {
 	UCHAR pData[39] = {0};
 
-
-	strncpy((PSTRING) pData, (PSTRING)ssidStr, strlen((PSTRING) ssidStr));
+	INT len = strlen((PSTRING) ssidStr);
+	if (len > 32)
+	    len = 32;
+	strncpy((PSTRING) pData, (PSTRING)ssidStr, len);
 	NdisMoveMemory(&pData[32], macAddr, MAC_ADDR_LEN);
 	pData[38] = Status;
 	WscSendUPnPMessage(pAd, apIdx, WSC_OPCODE_UPNP_MGMT, WSC_UPNP_MGMT_SUB_CONFIG_REQ,
@@ -5643,8 +5645,8 @@ VOID	WscSendEapFail(
 
     /* Out buffer for transmitting EAP-Req(Identity) */
 	os_alloc_mem(NULL, (UCHAR **)&pOutBuffer, MAX_LEN_OF_MLME_BUFFER);
-    if(pOutBuffer == NULL)
-        return;
+	if(pOutBuffer == NULL)
+	    return;
 
 	FrameLen = 0;
 
@@ -6553,7 +6555,6 @@ VOID WscStop(
 
 #ifdef CONFIG_AP_SUPPORT
 	MAC_TABLE_ENTRY  *pEntry;
-	UCHAR	apidx = (pWscControl->EntryIfIdx & 0x0F);
 #endif /* CONFIG_AP_SUPPORT */
 	UCHAR	CurOpMode = 0xff;
 
@@ -9268,14 +9269,14 @@ INT	WscGetConfWithoutTrigger(
     if (bFromUPnP)
         WscStop(pAd, FALSE, pWscControl);
 
-	if (pWscControl->WscMode == 1)
-		WscMode = DEV_PASS_ID_PIN;
-	else
-		WscMode = DEV_PASS_ID_PBC;
+    if (pWscControl->WscMode == 1)
+	WscMode = DEV_PASS_ID_PIN;
+    else
+	WscMode = DEV_PASS_ID_PBC;
 
-	WscBuildBeaconIE(pAd, IsAPConfigured, TRUE, WscMode, pWscControl->WscConfigMethods, (pWscControl->EntryIfIdx & 0x0F), NULL, 0, AP_MODE);
-	WscBuildProbeRespIE(pAd, WSC_MSGTYPE_AP_WLAN_MGR, IsAPConfigured, TRUE, WscMode, pWscControl->WscConfigMethods, pWscControl->EntryIfIdx, NULL, 0, AP_MODE);
-	APUpdateBeaconFrame(pAd, pWscControl->EntryIfIdx & 0x0F);
+    WscBuildBeaconIE(pAd, IsAPConfigured, TRUE, WscMode, pWscControl->WscConfigMethods, (pWscControl->EntryIfIdx & 0x0F), NULL, 0, AP_MODE);
+    WscBuildProbeRespIE(pAd, WSC_MSGTYPE_AP_WLAN_MGR, IsAPConfigured, TRUE, WscMode, pWscControl->WscConfigMethods, pWscControl->EntryIfIdx, NULL, 0, AP_MODE);
+    APUpdateBeaconFrame(pAd, pWscControl->EntryIfIdx & 0x0F);
 
     /* 2mins time-out timer */
     RTMPSetTimer(&pWscControl->Wsc2MinsTimer, WSC_TWO_MINS_TIME_OUT);
@@ -9902,15 +9903,15 @@ VOID WscWriteConfToDatFile(RTMP_ADAPTER *pAd, UCHAR CurOpMode)
 					if (pAd->ApCfg.MBSSID[apidx].wdev.WepStatus == Ndis802_11WEPEnabled)
 					{
 						UCHAR idx = 0, KeyType[4] = {0};
-                        PSTRING ptr2, temp_ptr;
+						PSTRING ptr2, temp_ptr;
 
-						ptr2 = rtstrstr(pTempStr, "=");
+						ptr2 = (PSTRING)rtstrstr(pTempStr, "=");
 						temp_ptr = pTempStr;
 						pTempStr = ptr2+1;
 						KeyType[0] = (UCHAR)(*pTempStr - 0x30);
 						for (idx = 1; idx < 4; idx++)
 						{
-							ptr2 = rtstrstr(pTempStr, ";");
+							ptr2 = (PSTRING)rtstrstr(pTempStr, ";");
 							if (ptr2 == NULL)
 								break;
 							pTempStr = ptr2+1;
@@ -11345,4 +11346,3 @@ BOOLEAN WscGetDataFromPeerByTag(
 }
 
 #endif /* WSC_INCLUDED */
-

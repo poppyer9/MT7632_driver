@@ -5043,7 +5043,7 @@ void andes_suspend_CR_setting(struct _RTMP_ADAPTER *ad)
 		}
 		/* DBGPRINT(RT_DEBUG_ERROR, ("wait UDMA EP4 Tx Empty\n")); */
 		count++;
-		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != 1))
+		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != BIT17))
 			DBGPRINT(RT_DEBUG_ERROR,
 				 ("%s: UDMA EP4-TX Not Empty!!! (seems not a problem though)\n",
 				  __func__));
@@ -5063,7 +5063,7 @@ void andes_suspend_CR_setting(struct _RTMP_ADAPTER *ad)
 		}
 		/* DBGPRINT(RT_DEBUG_ERROR, ("wait UDMA EP5 Tx Empty\n")); */
 		count++;
-		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != 1))
+		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != BIT17))
 			DBGPRINT(RT_DEBUG_ERROR, ("%s: UDMA EP5-TX Not Empty!!!\n",  __func__));
 	}
 
@@ -5081,7 +5081,7 @@ void andes_suspend_CR_setting(struct _RTMP_ADAPTER *ad)
 		}
 		/* DBGPRINT(RT_DEBUG_ERROR, ("wait UDMA EP6 Tx Empty\n")); */
 		count++;
-		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != 1))
+		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != BIT17))
 			DBGPRINT(RT_DEBUG_ERROR, ("%s: UDMA EP6-TX Not Empty!!!\n",  __func__));
 	}
 
@@ -5099,7 +5099,7 @@ void andes_suspend_CR_setting(struct _RTMP_ADAPTER *ad)
 		}
 		/* DBGPRINT(RT_DEBUG_ERROR, ("wait UDMA EP7 Tx Empty\n")); */
 		count++;
-		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != 1))
+		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != BIT17))
 			DBGPRINT(RT_DEBUG_ERROR, ("%s: UDMA EP7-TX Not Empty!!!\n",  __func__));
 	}
 
@@ -5117,7 +5117,7 @@ void andes_suspend_CR_setting(struct _RTMP_ADAPTER *ad)
 		}
 		/* DBGPRINT(RT_DEBUG_ERROR, ("wait UDMA EP8 Tx Empty\n")); */
 		count++;
-		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != 1))
+		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != BIT17))
 			DBGPRINT(RT_DEBUG_ERROR, ("%s: UDMA EP8-TX Not Empty!!!\n",  __func__));
 	}
 
@@ -5135,7 +5135,7 @@ void andes_suspend_CR_setting(struct _RTMP_ADAPTER *ad)
 		}
 		/* DBGPRINT(RT_DEBUG_ERROR, ("wait UDMA EP9 Tx Empty\n")); */
 		count++;
-		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != 1))
+		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT17) != BIT17))
 			DBGPRINT(RT_DEBUG_ERROR, ("%s: UDMA EP9-TX Not Empty!!!\n",  __func__));
 	}
 
@@ -5362,7 +5362,7 @@ void andes_suspend_CR_setting(struct _RTMP_ADAPTER *ad)
 		}
 		/* DBGPRINT(RT_DEBUG_ERROR, ("wait UDMA EP4 Rx Empty\n")); */
 		count++;
-		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT24) != 1))
+		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT24) != BIT24))
 			DBGPRINT(RT_DEBUG_ERROR, ("%s: UDMA EP4-IN Not Empty!!!\n",  __func__));
 	}
 
@@ -5381,7 +5381,7 @@ void andes_suspend_CR_setting(struct _RTMP_ADAPTER *ad)
 		}
 		/* DBGPRINT(RT_DEBUG_ERROR, ("wait UDMA EP5 Rx Empty\n")); */
 		count++;
-		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT24) != 1))
+		if (count == WAIT_EMPTY_RETRY_COUNT && ((Value & BIT24) != BIT24))
 			DBGPRINT(RT_DEBUG_ERROR, ("%s: UDMA EP5-IN Not Empty!!!\n",  __func__));
 		}
 

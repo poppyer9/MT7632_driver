@@ -67,8 +67,8 @@ static VOID APPeerProbeReqAction(IN PRTMP_ADAPTER pAd, IN MLME_QUEUE_ELEM * Elem
 		return;
 #endif /* WDS_SUPPORT */
 
-	if (!PeerProbeReqSanity(pAd, Elem->Msg, Elem->MsgLen, &ProbeReqParam))
-		return;
+		if (!PeerProbeReqSanity(pAd, Elem->Msg, Elem->MsgLen, &ProbeReqParam))
+			return;
 
 		for (apidx = 0; apidx < pAd->ApCfg.BssidNum; apidx++) {
 			mbss = &pAd->ApCfg.MBSSID[apidx];

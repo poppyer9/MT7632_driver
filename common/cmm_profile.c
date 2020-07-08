@@ -3923,7 +3923,7 @@ NDIS_STATUS RTMPSetProfileParameters(IN RTMP_ADAPTER *pAd, IN const char *pBuffe
 				ret = os_strtol(tmpbuf, 10, &longtmp);
 				if (ret < 0)
 					return FALSE;
-					pAd->CommonCfg.RegTransmitSetting.field.ITxBfEn
+				pAd->CommonCfg.RegTransmitSetting.field.ITxBfEn
 						= (longtmp != 0);
 				DBGPRINT(RT_DEBUG_TRACE,
 					 ("ITxBfEn = %d\n",
@@ -5197,7 +5197,7 @@ NDIS_STATUS RTMPSetProfileParameters(IN RTMP_ADAPTER *pAd, IN const char *pBuffe
 		}
 
 		if (RTMPGetKeyParameter("WscVendorPinCode", tmpbuf, 256, pBuffer, TRUE)) {
-			PWSC_CTRL pWscContrl;
+			PWSC_CTRL pWscContrl = 0;
 			int bSetOk;
 #ifdef CONFIG_AP_SUPPORT
 			IF_DEV_CONFIG_OPMODE_ON_AP(pAd) {
@@ -5853,7 +5853,7 @@ free_resource:
 #endif /* MULTIPLE_CARD_SUPPORT */
 
 #ifdef WSC_INCLUDED
-void rtmp_read_wsc_user_parms(PWSC_CTRL pWscControl, STRING *tmpbuf, STRING *buffer)
+void rtmp_read_wsc_user_parms(PWSC_CTRL pWscControl, STRING *tmpbuf, const STRING *buffer)
 {
 	if (RTMPGetKeyParameter("WscManufacturer", tmpbuf, WSC_MANUFACTURE_LEN, buffer, TRUE)) {
 		NdisZeroMemory(pWscControl->RegData.SelfInfo.Manufacturer, WSC_MANUFACTURE_LEN);
@@ -5895,7 +5895,7 @@ void rtmp_read_wsc_user_parms(PWSC_CTRL pWscControl, STRING *tmpbuf, STRING *buf
 	}
 }
 
-void rtmp_read_wsc_user_parms_from_file(IN PRTMP_ADAPTER pAd, char *tmpbuf, char *buffer)
+void rtmp_read_wsc_user_parms_from_file(IN PRTMP_ADAPTER pAd, char *tmpbuf, const char *buffer)
 {
 	PWSC_CTRL pWscControl;
 

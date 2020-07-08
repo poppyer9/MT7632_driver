@@ -446,7 +446,7 @@ BOOLEAN RTMP_CFG80211_VIF_P2P_GO_ON(VOID *pAdSrc)
 	if (!pNetDev)
 		return FALSE;
 
-		return TRUE;
+	return TRUE;
 #endif /* RT_CFG80211_P2P_CONCURRENT_DEVICE */
 
 #ifdef RT_CFG80211_P2P_SINGLE_DEVICE

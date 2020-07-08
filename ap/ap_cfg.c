@@ -12105,7 +12105,7 @@ INT Set_WscUUID_STR_Proc(IN PRTMP_ADAPTER pAd, IN PSTRING arg)
 	}
 
 	DBGPRINT(RT_DEBUG_TRACE,
-		 ("ERROR Set_WscUUID_E_Proc[%d]::(arg=%s), Leng(%d) is incorrect!\n",
+		 ("ERROR Set_WscUUID_E_Proc[%d]::(arg=%s), Leng(%lu) is incorrect!\n",
 		  pObj->ioctl_if, arg, strlen(arg)));
 	return FALSE;
 }
@@ -12125,7 +12125,7 @@ INT Set_WscUUID_HEX_E_Proc(IN PRTMP_ADAPTER pAd, IN PSTRING arg)
 	}
 
 	DBGPRINT(RT_DEBUG_TRACE,
-		 ("ERROR Set_WscUUID_HEX_E_Proc[%d]::(arg=%s), Leng(%d) is incorrect!\n",
+		 ("ERROR Set_WscUUID_HEX_E_Proc[%d]::(arg=%s), Leng(%lu) is incorrect!\n",
 		  pObj->ioctl_if, arg, strlen(arg)));
 	return FALSE;
 }

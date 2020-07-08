@@ -121,18 +121,18 @@ VOID APMakeBssBeacon(RTMP_ADAPTER *pAd, INT apidx)
 	if (PhyMode == WMODE_B)
 		SupRateLen = 4;
 
-		MakeOutgoingFrame(pBeaconFrame, &FrameLen,
-				  sizeof(HEADER_802_11), &BcnHdr,
-				  TIMESTAMP_LEN, &FakeTimestamp,
-				  2, &pAd->CommonCfg.BeaconPeriod,
-				  2, &pMbss->CapabilityInfo,
-				  1, &SsidIe,
-				  1, &pMbss->SsidLen,
-				  pMbss->SsidLen, pMbss->Ssid,
-				  1, &SupRateIe,
-				  1, &SupRateLen,
-				  SupRateLen, pAd->CommonCfg.SupRate,
-				  1, &DsIe, 1, &DsLen, 1, &pAd->CommonCfg.Channel, END_OF_ARGS);
+	MakeOutgoingFrame(pBeaconFrame, &FrameLen,
+			  sizeof(HEADER_802_11), &BcnHdr,
+			  TIMESTAMP_LEN, &FakeTimestamp,
+			  2, &pAd->CommonCfg.BeaconPeriod,
+			  2, &pMbss->CapabilityInfo,
+			  1, &SsidIe,
+			  1, &pMbss->SsidLen,
+			  pMbss->SsidLen, pMbss->Ssid,
+			  1, &SupRateIe,
+			  1, &SupRateLen,
+			  SupRateLen, pAd->CommonCfg.SupRate,
+			  1, &DsIe, 1, &DsLen, 1, &pAd->CommonCfg.Channel, END_OF_ARGS);
 
 	if ((pAd->CommonCfg.ExtRateLen) && (PhyMode != WMODE_B)) {
 		ULONG TmpLen;

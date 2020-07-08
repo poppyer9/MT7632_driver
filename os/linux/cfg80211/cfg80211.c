@@ -338,13 +338,13 @@ static int CFG80211_OpsVirtualInfChg(struct wiphy *pWiphy,
 		if (((*pFlags) & NL80211_MNTR_FLAG_FCSFAIL) == NL80211_MNTR_FLAG_FCSFAIL)
 			VifInfo.MonFilterFlag |= RT_CMD_80211_FILTER_FCSFAIL;
 
-		if (((*pFlags) & NL80211_MNTR_FLAG_FCSFAIL) == NL80211_MNTR_FLAG_PLCPFAIL)
+		if (((*pFlags) & NL80211_MNTR_FLAG_PLCPFAIL) == NL80211_MNTR_FLAG_PLCPFAIL)
 			VifInfo.MonFilterFlag |= RT_CMD_80211_FILTER_PLCPFAIL;
 
 		if (((*pFlags) & NL80211_MNTR_FLAG_CONTROL) == NL80211_MNTR_FLAG_CONTROL)
 			VifInfo.MonFilterFlag |= RT_CMD_80211_FILTER_CONTROL;
 
-		if (((*pFlags) & NL80211_MNTR_FLAG_CONTROL) == NL80211_MNTR_FLAG_OTHER_BSS)
+		if (((*pFlags) & NL80211_MNTR_FLAG_OTHER_BSS) == NL80211_MNTR_FLAG_OTHER_BSS)
 			VifInfo.MonFilterFlag |= RT_CMD_80211_FILTER_OTHER_BSS;
 	}
 
@@ -3250,7 +3250,6 @@ BOOLEAN CFG80211_Register(IN VOID *pAd, IN struct device *pDev, IN struct net_de
 {
 	CFG80211_CB *pCfg80211_CB = NULL;
 	CFG80211_BAND BandInfo;
-	INT err;
 
 	/* allocate Main Device Info structure */
 	os_alloc_mem_suspend(NULL, (UCHAR **) &pCfg80211_CB, sizeof(CFG80211_CB));

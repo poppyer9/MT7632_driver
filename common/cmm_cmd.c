@@ -118,7 +118,7 @@ BOOLEAN CMDFilterInWOW(IN PRTMP_ADAPTER pAd, IN NDIS_OID Oid)
 				("DO with it for CMD[%u] in SUSPEND process\n", Oid));
 			break;
 		}
-		return ret;
+	return ret;
 }
 
 NDIS_STATUS RTEnqueueInternalCmd(IN PRTMP_ADAPTER pAd,

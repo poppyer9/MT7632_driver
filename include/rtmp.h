@@ -3962,6 +3962,10 @@ typedef struct _TX_POWER_CONTROL_EXT_OVER_MAC {
 #define WOW_MAX_PORT_NUM_TCPV6		WOW_MAX_PORT_NUM_TCPV4
 #define WOW_MAX_PORT_NUM_UDPV4		WOW_MAX_PORT_NUM_TCPV4
 #define WOW_MAX_PORT_NUM_UDPV6		WOW_MAX_PORT_NUM_TCPV4
+#define SIZE_MAX_PORT_NUM_TCPV4		(WOW_MAX_PORT_NUM_TCPV4 * sizeof(UINT32))
+#define SIZE_MAX_PORT_NUM_TCPV6		SIZE_MAX_PORT_NUM_TCPV4
+#define SIZE_MAX_PORT_NUM_UDPV4		SIZE_MAX_PORT_NUM_TCPV4
+#define SIZE_MAX_PORT_NUM_UDPV6		SIZE_MAX_PORT_NUM_TCPV4
 #define HCI_GPIO_CONFIG_OPCODE		0xFC6F
 #define HCI_GPIO_CONFIG_LEN			0x38
 #define WMT_GPIO_CONFIG_DirTYPE		0x01
@@ -6058,7 +6062,7 @@ INT RTMPGetKeyParameter(IN const char *key,
 			IN INT destsize, IN const char *buffer, IN BOOLEAN bTrimSpace);
 
 #ifdef WSC_INCLUDED
-VOID rtmp_read_wsc_user_parms_from_file(IN RTMP_ADAPTER *pAd, IN char *tmpbuf, IN char *buffer);
+VOID rtmp_read_wsc_user_parms_from_file(IN RTMP_ADAPTER *pAd, IN char *tmpbuf, IN const char *buffer);
 #endif /*WSC_INCLUDED */
 
 #ifdef SINGLE_SKU_V2
